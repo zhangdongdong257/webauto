@@ -41,7 +41,7 @@ public class WeChatLoginTest {
 
     @AfterAll
     public static void quit() {
-        chromeDriver.quit();
+        //chromeDriver.quit();
     }
 
     @DisplayName("获取Cookles并写入YAML文件中")
@@ -65,7 +65,6 @@ public class WeChatLoginTest {
         ObjectMapper objectMapper = new ObjectMapper(new YAMLFactory());
         objectMapper.writeValue(new File(TEST_DATA_FILE_PATH+"cookies.yaml"), cookies);
 
-        chromeDriver.quit();
     }
 
     @Test

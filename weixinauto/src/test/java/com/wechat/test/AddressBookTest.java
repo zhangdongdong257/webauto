@@ -35,7 +35,7 @@ public class AddressBookTest {
 
     @AfterAll
     public static void quit() {
-        chromeDriver.quit();
+        //chromeDriver.quit();
     }
 
     @Test
@@ -59,7 +59,7 @@ public class AddressBookTest {
         //查找姓名输入框
         WebElement inputNameText = new WebDriverWait(chromeDriver, Duration.ofSeconds(SEARCH_ELEMENT_TIME))
                 .until(ExpectedConditions.elementToBeClickable(
-                        By.cssSelector("#username")));
+                        By.id("username")));
         Allure.step("点击姓名输入框，输入名称");
         String name = "张三";
         inputNameText.sendKeys(name);
