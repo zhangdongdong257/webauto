@@ -3,6 +3,7 @@ package com.wechat.test;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -28,7 +29,7 @@ import static org.hamcrest.Matchers.hasItems;
 @DisplayName("企业微信登录获取cookies")
 public class WeChatLoginTest {
 
-    private final static String URL = "mvn";
+    private final static String URL = "https://work.weixin.qq.com/wework_admin/loginpage_wx";
 
     private final static Integer TIMEOUT = 30 , SLEEPTIME = 2;
 
@@ -38,9 +39,11 @@ public class WeChatLoginTest {
     public static ChromeDriver chromeDriver;
 
 
+    @AfterAll
+    public static void quit() {
+        chromeDriver.quit();
+    }
 
-
-    @Test
     @DisplayName("获取Cookles并写入YAML文件中")
     public  void wirterCookies() throws IOException {
 
@@ -99,16 +102,12 @@ public class WeChatLoginTest {
         WebDriverWait webDriverWait = new WebDriverWait(chromeDriver, Duration.ofSeconds(TIMEOUT), Duration.ofSeconds(SLEEPTIME));
         webDriverWait.until(ExpectedConditions.urlContains("/wework_admin/frame"));
 
-
-
         Allure.step("检测是否登录成功");
         By memberTextItems = By.cssSelector(".frame_nav_item_title");
         List<String> memberTexts = chromeDriver.findElements(memberTextItems)
                 .stream().map(e -> e.getText()).collect(Collectors.toList());
         assertThat(memberTexts, hasItems("首页"));
         assertThat(memberTexts, hasItems("通讯录"));
-
-        //chromeDriver.quit();
 
     }
 

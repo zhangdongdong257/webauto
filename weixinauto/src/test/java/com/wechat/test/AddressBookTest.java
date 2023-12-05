@@ -35,7 +35,7 @@ public class AddressBookTest {
 
     @AfterAll
     public static void quit() {
-        //chromeDriver.quit();
+        chromeDriver.quit();
     }
 
     @Test
@@ -111,6 +111,9 @@ public class AddressBookTest {
         accpetBnt.click();
 
         Allure.step("断言添加成员信息是不否包含在成员列表中");
+        WebDriverWait  webDriverWait2 = new WebDriverWait(chromeDriver, Duration.ofSeconds(SEARCH_ELEMENT_TIME));
+        webDriverWait2.until(ExpectedConditions.elementToBeClickable(memberTextItems));
+
         List<String> memberTexts2 = chromeDriver.findElements(memberTextItems)
                 .stream().map(e -> e.getText()).collect(Collectors.toList());
         assertThat(memberTexts2, not(name));
