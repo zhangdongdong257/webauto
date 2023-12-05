@@ -41,7 +41,7 @@ public class WeChatLoginTest {
 
     @AfterAll
     public static void quit() {
-        //chromeDriver.quit();
+        chromeDriver.quit();
     }
 
     @DisplayName("获取Cookles并写入YAML文件中")

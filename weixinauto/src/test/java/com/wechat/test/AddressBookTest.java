@@ -35,7 +35,7 @@ public class AddressBookTest {
 
     @AfterAll
     public static void quit() {
-        //chromeDriver.quit();
+        chromeDriver.quit();
     }
 
     @Test
